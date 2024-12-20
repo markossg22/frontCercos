@@ -32,27 +32,24 @@ const Carrito = () => {
       {cart.length === 0 ? (
         <p>El carrito está vacío.</p>
       ) : (
-        <div>
-          <ul>
+        <div className="carrito">
             {cart.map((product) => (
-              <li key={product.id}>
-                <img src={product.image} alt={product.name} style={{ width: '50px', height: '50px' }} />
-                <h3>{product.name}</h3>
-                <p>Precio: ${product.price * product.quantity}</p>
-                <p>Cantidad: {product.quantity}</p>
-                <button onClick={() => incrementQuantity(product.id)}>Añadir más</button>
-                <button onClick={() => decrementQuantity(product.id)}>Eliminar uno</button>
-                <button onClick={() => removeFromCart(product.id)}>Eliminar del carrito</button>
-              </li>
+              <div className="producto-cart" key={product.id}>
+                <img src={product.image} alt={product.name} style={{ width: '90%', height: '50%' }} />
+                <h2>{product.name}</h2>
+                <h3>Precio: ${product.price*product.quantity}</h3>
+                <h3>Cantidad: {product.quantity}</h3>   
+                <button className="btn-cart" onClick={() => incrementQuantity(product.id)}><h2>+</h2></button>
+                <button className="btn-cart" onClick={() => decrementQuantity(product.id)}><h2>-</h2></button>
+                <button className="btn-cart" onClick={() => removeFromCart(product.id)}><h2>🗑</h2></button>
+              </div>
             ))}
-          </ul>
-
-          <div style={{ marginTop: '20px' }}>
-            <h3>Total: ${cart.reduce((acc, product) => acc + product.price * product.quantity, 0)}</h3>
-            <button onClick={handleCheckout}>Ir al pago</button>
-          </div>
         </div>
       )}
+      <div>
+        <h3>Total: ${cart.reduce((acc, product) => acc + product.price * product.quantity, 0)}</h3>
+        <button className='btn-checkout' onClick={handleCheckout}>Ir al pago</button>
+      </div>
     </div>
   );
 };

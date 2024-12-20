@@ -1,20 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
-    --ColPrim: rgb(162, 72, 43);
+    --ColPrim: rgb(192, 67, 25);
     --ColSec: rgb(255, 222,0);
     --ColTer: rgb(132, 0, 83);
-    --ColCuar: rgb(132, 0, 83);
-    --Font1: "Qwitcher Grypen", cursive;
-    --Font2: "Comfortaa", sans-serif;
+    --Font1: "Roboto Condensed", serif;
 }
 
+@media only screen and (min-width: 1080px) {
+  :root {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  :root {
+    font-size: 10px;
+  }
+}
+
+.content {
+  background-color: var(--ColSec);
+}
+
+.content ul {
+  max-width: 60%;
+  justify-content: center;
+}
+
+.content img {
+  box-shadow: 0 1rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.imgs {
+  width: 45%;
+  border-radius: 2rem;
+}
+
+.carousel img {
+  width: 90%;
+  border-radius: 4rem;
+}
 
 .grid-container {
   display: grid;
   grid-template-areas:
     "header header header"
-    "menu content sidebar"
+    "menu content content"
     "footer footer footer";
-  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-columns: 1fr 2.5fr 2.5fr;
   grid-template-rows: auto 1fr auto;
   height: 100vh;
 }
@@ -26,19 +66,15 @@
   font-family: var(--Font1);
   font-size: 4rem;
   text-align: center;
-  padding: 1rem;
 }
 
-.menu {
-  grid-area: menu;
-  background-color: var(--ColSec);
-  font-family: var(--Font2);
-  padding: 1rem;
+.header img {
+  max-height: 8rem;
 }
 
 .content {
   grid-area: content;
-  font-family: var(--Font2);
+  font-family: var(--Font1);
   text-align: center;
   padding: 0;
 }
@@ -46,23 +82,24 @@
 .sidebar {
   grid-area: sidebar;
   background-color: var(--ColSec);
-  font-family: var(--Font2);
+  font-family: var(--Font1);
   padding: 1rem;
 }
 
 .footer {
   grid-area: footer;
-  background-color: var(--ColCuar);
+  display: flex;
+  background-color: var(--ColPrim);
   color: white;
   font-family: var(--Font1);
-  font-size: 2rem;
+  font-size: 1rem;
   text-align: center;
-  padding: 1rem;
+  justify-content: space-around;
 }
 
 button {
   background-color: var(--ColSec);
-  color: red;
+  color: var(--ColPrim);
   border: none;
   border-radius: 0rem;
   padding: 1rem 2rem;
@@ -71,27 +108,51 @@ button {
   width: 100%;
 }
 
+.razones {
+  display: flex;
+  justify-content: space-around;
+  text-align: left;
+}
+
+.razones li:hover{
+  color: var(--ColTer);
+  transition: all 0.3s ease-in-out;
+}
+
 /* Estilo del botón del menú */
 .menu {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 2rem;
+  grid-area: menu;
+  background-color: var(--ColTer);
+  font-family: var(--Font1);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 2rem;
+}
+
+.menu img{
+  max-width: 18rem;
 }
 
 .menu button {
 background-color: var(--ColSec);
-color: red;
+box-shadow: 0 1rem 0.5rem rgba(0, 0, 0, 0.2);
+color: var(--ColPrim);
 border: none;
 border-radius: 1rem;
 padding: 1rem 2rem;
 cursor: pointer;
-font-size: 2rem;
+font-size: 1.5rem;
+color: black;
 width: 100%;
+transition: all 0.3s ease-in-out;
 }
 
 .menu button:hover {
-background-color: var(--ColTer);
+  background-color: black;
+  color: var(--ColSec);
 }
 
 .carousel {
@@ -108,7 +169,7 @@ justify-content: center;
 width: 100%;
 height: 100%;
 object-fit: cover;
-transition: opacity 1.5s ease-in-out;}
+transition: all 0.3s ease-in-out;}
 
 .carousel-text {
 position: absolute;
@@ -119,5 +180,69 @@ text-align: center;
 background: var(--ColPrim);
 padding: 1rem 2rem;
 border-radius: 2rem;
-bottom: 2rem;
+bottom: 5rem;
+}
+
+.btn-cart {
+  border-radius: 3rem;
+  margin: 0.2rem;
+  max-width: 25%;
+  max-height: 25%;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-cart:hover {
+  background-color: var(--ColTer);
+  color: var(--ColSec);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-checkout {
+  text-align: center;
+  border-radius: 3rem;
+  margin: 1rem;
+  max-width: 20%;
+  max-height: 10%;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-checkout:hover {
+  background-color: var(--ColTer);
+  margin: 0.25rem;
+  font-size: 1.5rem;
+  color: var(--ColSec);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-add {
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-add:hover {
+  text-align: center;
+  font-size: 1.5rem;
+  background-color: var(--ColTer);
+  color: var(--ColSec);
+  transition: all 0.3s ease-in-out;
+}
+
+.producto-cart {
+  margin: 3rem;
+  background-color: var(--ColPrim);
+  padding: 1rem;
+  border-radius: 2rem;
+}
+
+.producto-cart img {
+  border-radius: 1.5rem;
+  border-style: groove;
+  border-color: var(--ColTer);
+}
+
+.carrito {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 0.5rem;
+  margin: 1rem;
 }

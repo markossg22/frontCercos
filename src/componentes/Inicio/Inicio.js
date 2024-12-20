@@ -16,13 +16,21 @@ const Inicio = () => {
       case 'inicio':
         return (
       <main className="content">
-        <h1>Vista Inicio</h1>
+        <h1>Poder Disuasivo</h1>
+        <h2>en cualquier condición climática</h2>
         <div className="carousel">
           <img src={images[currentSlide].src} alt="Taza" className="carousel-image" />
           <div className="carousel-text">{images[currentSlide].text}</div>
         </div>
-        <h1>Las mejores tazas de todo Tucumán</h1>
-        <h3>Lorem ipsum dolor sit amet consectetur adipiscing elit at potenti mauris diam, vestibulum duis odio sagittis ad egestas cras fames pulvinar tristique feugiat nulla, blandit mattis id viverra placerat maecenas sem lobortis suspendisse laoreet. Ac posuere dis tristique nullam nunc vel potenti erat, enim bibendum cursus orci a faucibus phasellus, platea porta sed praesent lobortis nisi at. Facilisis himenaeos iaculis orci mauris id vulputate aliquam nibh enim, dis egestas fusce imperdiet torquent leo neque quis ullamcorper, dui vestibulum class fermentum lobortis natoque condimentum fames.</h3>
+        <h2>ELIJA TRANQUILIDAD!</h2>
+        <h3>Exija productos eléctricamente seguros</h3>
+        <p>Desde la fabricación hasta la instalación llave en mano, ALARI 3 le da seguridad. La gama de productos y accesorios exclusivos ALARI 3 para la construccion de los cercos de seguridad son desarrollados y producidos bajo las mas estrictas normas internacionales de seguridad eléctrica.</p>
+        <img className='imgs'
+          src="/media/PREVENTION1.jpg"
+          alt="Prevention"
+        />
+        <h2>¿Para qué arriesgarse?</h2>
+        <h3>Certificamos por su Seguridad!</h3>
         </main>
         );
       case 'quienes-somos':
@@ -43,9 +51,9 @@ const Inicio = () => {
   //carrusel
 
   const images = [
-    { src: 'https://swiperjs.com/demos/images/nature-1.jpg', text: 'Las Mejores Tazas de Tucumán' },
-    { src: 'https://swiperjs.com/demos/images/nature-2.jpg', text: 'Calidad Asegurada' },
-    { src: 'https://swiperjs.com/demos/images/nature-3.jpg', text: 'Variedad de modelos' },
+    { src: '/media/PREVENTION3.jpg', text: 'Las Mejores Tazas de Tucumán' },
+    { src: '/media/PREVENTION4.jpg', text: 'Calidad Asegurada' },
+    { src: '/media/PREVENTION5.jpg', text: 'Variedad de modelos' },
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -53,7 +61,7 @@ const Inicio = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % images.length);
-    }, 8000); // Cambia cada 3 segundos
+    }, 5000); // Cambia cada 3 segundos
 
     return () => clearInterval(interval); // Limpia el intervalo al desmontar
   }, [images.length]);
@@ -62,7 +70,12 @@ const Inicio = () => {
 
   return (
     <div className="grid-container">
-      <header className="header">Mundo Tazas</header>
+      <header className="header">
+        <img
+          src="/media/PREVENTION.svg"
+          alt="Logo Prevention"
+        />
+        </header>
       <nav className="menu">
       <button onClick={() => setCurrentView('login')} className="menu-button">
           Cuenta
@@ -82,12 +95,19 @@ const Inicio = () => {
       <button onClick={() => setCurrentView('carrito')} className="menu-button">
           Carrito de Compras
       </button>
+      <img
+          src="/media/Sello.svg"
+          alt="Logo Prevention"
+        />
     </nav>
       <main className="content">
       {renderView()}
      </main>
-      <aside className="sidebar">Espacio para publicidad</aside>
-      <footer className="footer">Pie de Página</footer>
+      <footer className="footer">
+        <p>Cel: (0381) 156 662-600</p>
+        <p>2024.Prevention.Todos los derechos reservados ®</p>
+        <p>Dirección</p>
+      </footer>
     </div>
   );
 };

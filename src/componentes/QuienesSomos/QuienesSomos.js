@@ -7,9 +7,9 @@ const Index = ({ children }) => {
   //carrusel
 
   const images = [
-    { src: 'https://swiperjs.com/demos/images/nature-1.jpg', text: 'Las Mejores Tazas de Tucumán' },
-    { src: 'https://swiperjs.com/demos/images/nature-2.jpg', text: 'Calidad Asegurada' },
-    { src: 'https://swiperjs.com/demos/images/nature-3.jpg', text: 'Variedad de modelos' },
+    { src: '/media/PREVENTION7.jpg', text: 'Las Mejores Tazas de Tucumán' },
+    { src: '/media/PREVENTION9.jpg', text: 'Calidad Asegurada' },
+    { src: '/media/PREVENTION8.jpg', text: 'Variedad de modelos' },
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -17,7 +17,7 @@ const Index = ({ children }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % images.length);
-    }, 8000); // Cambia cada 3 segundos
+    }, 5000); // Cambia cada 3 segundos
 
     return () => clearInterval(interval); // Limpia el intervalo al desmontar
   }, [images.length]);
@@ -30,13 +30,26 @@ const Index = ({ children }) => {
 
   return (
       <main className="content">
-        <h1>Vista Quienes Somos</h1>
+        <h1>¿Por que elegirnos?</h1>
         <div className="carousel">
           <img src={images[currentSlide].src} alt="Taza" className="carousel-image" />
           <div className="carousel-text">{images[currentSlide].text}</div>
         </div>
-        <h1>Nuestra Breve historia</h1>
-        <h3>Lorem ipsum dolor sit amet consectetur adipiscing elit at potenti mauris diam, vestibulum duis odio sagittis ad egestas cras fames pulvinar tristique feugiat nulla, blandit mattis id viverra placerat maecenas sem lobortis suspendisse laoreet. Ac posuere dis tristique nullam nunc vel potenti erat, enim bibendum cursus orci a faucibus phasellus, platea porta sed praesent lobortis nisi at. Facilisis himenaeos iaculis orci mauris id vulputate aliquam nibh enim, dis egestas fusce imperdiet torquent leo neque quis ullamcorper, dui vestibulum class fermentum lobortis natoque condimentum fames.</h3>
+        <h1>Las 8 razones ALARI</h1>
+        <div className='razones'>
+        <ul>
+          <li><h2>Gran poder disuasivo</h2></li>
+          <li><h2>Menor costo por metro instalado</h2></li>
+          <li><h2>Deteccion de pre-intrusión</h2></li>
+          <li><h2>No requiere instalaciones moviles ni bajo tierra</h2></li>
+        </ul>
+        <ul>
+          <li><h2>Monitoreo local o remoto</h2></li>
+          <li><h2>La linea mas cimpleta de accesorios antivandalismo</h2></li>
+          <li><h2>Software exclusivo</h2></li>
+          <li><h2>Soporte técnico para proyectos</h2></li>
+        </ul>
+        </div>
      </main>
   );
 };

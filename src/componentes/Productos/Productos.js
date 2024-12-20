@@ -10,6 +10,7 @@ const Index = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        // Hacemos la solicitud GET a la API para obtener los productos
         const response = await axios.get('http://localhost:5000/api/products');
         setProducts(response.data);
       } catch (error) {
@@ -18,6 +19,11 @@ const Index = () => {
     };
     fetchProducts();
   }, []);
+
+  //const addToCart = (product) => {
+  //  setCart((prevCart) => [...prevCart, product]);
+  //};
+//FINALIZACION CARRITO
 
   return (
       <main className="content">
@@ -38,7 +44,7 @@ const Index = () => {
                 <div style={styles.overlay}>
                   <h3>{product.name}</h3>
                   <p>Precio: ${product.price}</p>
-                  <button onClick={() => addToCart({ ...product, id: product._id, quantity: 1 })}> 
+                  <button className='btn-add' onClick={() => addToCart({ ...product, id: product._id, quantity: 1 })}> 
       Añadir al carrito
     </button>
                 </div>
@@ -60,15 +66,15 @@ const styles = {
     padding: '3rem',
   },
   card: {
-    border: '1rem solid #ccc',
     borderRadius: '3rem',
-    padding: '2rem',
+    padding: '1rem',
     textAlign: 'center',
     color: '#fff',
     height: '15rem',
     width: '15rem',
     position: 'relative',
     overflow: 'hidden',
+    boxShadow: '0 1rem 0.5rem rgba(0, 0, 0, 0.2)',
   },
   overlay: {
     fontSize: '12px',
