@@ -1,0 +1,34 @@
+.Carrito ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .Carrito li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .Carrito button {
+    margin-left: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4rem;
+    cursor: pointer;
+  }
+  
+  .Carrito button:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-cart {
+    background-color: #ff00003c;
+    color: #000000;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
