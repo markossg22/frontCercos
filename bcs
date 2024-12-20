@@ -1,0 +1,8 @@
+import Productos from './componentes/Productos';
+import TazasPersonalizadas from './componentes/TazasPersonalizadas';
+import DondeEstamos from './componentes/DondeEstamos';
+
+
+<Route path="/productos" element={<Productos />} />
+        <Route path="/tazas-personalizadas" element={<TazasPersonalizadas />} />
+        <Route path="/donde-estamos" element={<DondeEstamos />} />

@@ -1,0 +1,123 @@
+:root {
+    --ColPrim: rgb(162, 72, 43);
+    --ColSec: rgb(255, 222,0);
+    --ColTer: rgb(132, 0, 83);
+    --ColCuar: rgb(132, 0, 83);
+    --Font1: "Qwitcher Grypen", cursive;
+    --Font2: "Comfortaa", sans-serif;
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "menu content sidebar"
+    "footer footer footer";
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+}
+
+.header {
+  grid-area: header;
+  background-color:var(--ColPrim);
+  color: white;
+  font-family: var(--Font1);
+  font-size: 4rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.menu {
+  grid-area: menu;
+  background-color: var(--ColSec);
+  font-family: var(--Font2);
+  padding: 1rem;
+}
+
+.content {
+  grid-area: content;
+  font-family: var(--Font2);
+  text-align: center;
+  padding: 0;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: var(--ColSec);
+  font-family: var(--Font2);
+  padding: 1rem;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: var(--ColCuar);
+  color: white;
+  font-family: var(--Font1);
+  font-size: 2rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+button {
+  background-color: var(--ColSec);
+  color: red;
+  border: none;
+  border-radius: 0rem;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  width: 100%;
+}
+
+/* Estilo del botón del menú */
+.menu {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 2rem;
+}
+
+.menu button {
+background-color: var(--ColSec);
+color: red;
+border: none;
+border-radius: 1rem;
+padding: 1rem 2rem;
+cursor: pointer;
+font-size: 2rem;
+width: 100%;
+}
+
+.menu button:hover {
+background-color: var(--ColTer);
+}
+
+.carousel {
+position: relative;
+width: 100%;
+height: 40rem;
+overflow: hidden;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.carousel-image {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: opacity 1.5s ease-in-out;}
+
+.carousel-text {
+position: absolute;
+color: black;
+font-size: 1rem;
+font-weight: bold;
+text-align: center;
+background: var(--ColPrim);
+padding: 1rem 2rem;
+border-radius: 2rem;
+bottom: 2rem;
+}
