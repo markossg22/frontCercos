@@ -7,7 +7,7 @@ const client = new MercadoPagoConfig({
 });
 
 const app = express();
-const port = 5000;
+const port = 8080;
 
 app.use(cors());
 app.use(express.json());
@@ -16,17 +16,17 @@ app.get("/", (req, res) => {
     res.send("Soy el server:)");
 });
 
-app.post("/create_preference", async (req, res) => {
+app.post("/api/mercadopago/create_preference", async (req, res) => {
     try {
+        const items = req.body.items.map(item => ({
+            title: item.title,
+            quantity: Number(item.quantity),
+            unit_price: Number(item.price),
+            currency_id: "ARS",
+        }));
+
         const body = {
-            items: [
-                {
-                    title: req.body.title,
-                    quantity: Number(req.body.quantity),
-                    unit_price: Number(req.body.price),
-                    currency_id: "ARS",
-                },
-            ],
+            items: items,
             back_urls: {
                 success: "http://localhost:3000/admin/products",
                 failure: "http://localhost:3000/admin/products",
@@ -34,6 +34,9 @@ app.post("/create_preference", async (req, res) => {
             },
             auto_return: "approved",
         };
+
+        // Imprimir el cuerpo de la solicitud para verificación
+        console.log("Creando preferencia con el cuerpo:", body);
 
         const preference = new Preference(client);
         const result = await preference.create({ body });
@@ -43,13 +46,14 @@ app.post("/create_preference", async (req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        console.error("Error al crear la preferencia:", error);
         res.status(500).json({
-            error: "Error al rear la preferencia :(",
+            error: "Error al crear la preferencia :(",
+            details: error.response ? error.response.data : 'No additional details available'
         });
     }
 });
 
 app.listen(port, () => {
-    console.log('El servidor esta corriendo en el puerto 5000' );
+    console.log('El servidor esta corriendo en el puerto: ' + port);
 });

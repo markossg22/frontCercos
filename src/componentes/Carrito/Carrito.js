@@ -7,23 +7,24 @@ const Carrito = () => {
 
   // Manejo del checkout (pago con Mercado Pago)
   const handleCheckout = async () => {
-    try {
-      // Preparar los items del carrito para enviarlos al backend
-      const response = await axios.post('http://localhost:5000/api/mercadopago/create_preference', {
-        items: cart.map((product) => ({
-          title: product.name,
-          quantity: product.quantity,
-          price: product.price,
-        })),
-      });
-
-      // Redirigir al usuario a la URL de Mercado Pago
-      window.location.href = response.data.init_point;
-    } catch (error) {
-      console.error('Error al procesar el pago:', error);
-      alert('Hubo un error al procesar el pago.');
-    }
+      try {
+          // Preparar los items del carrito para enviarlos al backend
+          const response = await axios.post('http://localhost:8080/api/mercadopago/create_preference', {
+              items: cart.map(product => ({
+                  title: product.name,
+                  quantity: product.quantity,
+                  price: product.price,
+              })),
+          });
+          console.log(response.data.id)
+          // Redirigir al usuario a la URL de Mercado Pago
+          window.location.href = "https://www.mercadopago.com/mla/checkout/start?pref_id="+response.data.id;
+      } catch (error) {
+          console.error('Error al procesar el pago:', error);
+          alert('Hubo un error al procesar el pago.');
+      }
   };
+  
 
   return (
     <div>
