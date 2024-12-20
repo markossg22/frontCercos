@@ -5,11 +5,91 @@ import DondeEstamos from '../DondeEstamos/DondeEstamos.js';
 import Carrito from '../Carrito/Carrito.js';
 import LoginForm from '../Login/LoginForm.js';
 import RegisterForm from '../Register/RegisterForm.js';
+import { Cloudinary } from '@cloudinary/url-gen';
+import { auto } from '@cloudinary/url-gen/actions/resize';
+import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
+import { AdvancedImage } from '@cloudinary/react';
 import './Inicio.css';
 
 const Inicio = () => {
 
+  const cld = new Cloudinary({ cloud: { cloudName: 'dehmb7i5p' } });
+
+  const Mail = () => {
+    const img = cld.image('pps/IconoMail2')
+    .format('auto')
+    .quality('auto')
+    .toURL();
+    return <img src={img} alt="Mail" />;
+  };
+
+  const Derec = () => {
+    const img = cld.image('pps/IconoDerechos2')
+    .format('auto')
+    .quality('auto')
+    .toURL();
+    return <img src={img} alt="Derechos" />;
+  };
+
+  const Tel = () => {
+    const img = cld.image('pps/IconoTel2') 
+    .format('auto')
+    .quality('auto')
+    .toURL();
+    return <img src={img} alt="Tel" />;
+  };
+
+  const Sello = () => {
+    const img = cld.image('pps/sello')
+    .format('auto')
+    .quality('auto')
+    .toURL();
+    return <img src={img} alt="Sello" />;
+  };
+
+  const PREVENTION = () => {
+    const img = cld.image('pps/PREVENTION')
+    .format('auto')
+    .quality('auto')
+    .toURL();
+    return <img src={img} alt="PREVENTION" />;
+  };
+
+  const PREVENTIONN = () => {
+    const img = cld.image('pps/PREVENTIONN')
+    .format('auto')
+    .quality('auto')
+    .resize(auto().height(500))
+    .toURL();
+    return <img src={img} alt="PREVENTION1" />;
+  };
+
   const [currentView, setCurrentView] = useState('login'); // Estado para la vista actual
+
+  const images = [
+    { 
+      publicId: 'pps/PREVENTION3', 
+      text: 'Seguridad sobre todo' 
+    },
+    { 
+      publicId: 'pps/PREVENTION4', 
+      text: 'Calidad Asegurada' 
+    },
+    { 
+      publicId: 'pps/PREVENTION9', 
+      text: 'Variedad de modelos' 
+    },
+  ];
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % images.length);
+    }, 5000); 
+
+    return () => clearInterval(interval); 
+  }, [images.length]);
 
   const renderView = () => {
     switch (currentView) {
@@ -18,17 +98,26 @@ const Inicio = () => {
       <main className="content">
         <h1>Poder Disuasivo</h1>
         <h2>en cualquier condición climática</h2>
+
         <div className="carousel">
-          <img src={images[currentSlide].src} alt="Taza" className="carousel-image" />
-          <div className="carousel-text">{images[currentSlide].text}</div>
-        </div>
+        <AdvancedImage 
+          cldImg={cld.image(images[currentSlide].publicId)
+            .format('auto')
+            .quality('auto')
+             
+            } 
+          alt={images[currentSlide].text} 
+          className="carousel-image" 
+        />
+        <div className="carousel-text">{images[currentSlide].text}</div>
+        </div>  
+        
         <h2>ELIJA TRANQUILIDAD!</h2>
         <h3>Exija productos eléctricamente seguros</h3>
-        <p>Desde la fabricación hasta la instalación llave en mano, ALARI 3 le da seguridad. La gama de productos y accesorios exclusivos ALARI 3 para la construccion de los cercos de seguridad son desarrollados y producidos bajo las mas estrictas normas internacionales de seguridad eléctrica.</p>
-        <img className='imgs'
-          src="/media/PREVENTION1.jpg"
-          alt="Prevention"
-        />
+        <p className='text'>Desde la fabricación hasta la instalación llave en mano, ALARI 3 le da seguridad. La gama de productos y accesorios exclusivos ALARI 3 para la construccion de los cercos de seguridad son desarrollados y producidos bajo las mas estrictas normas internacionales de seguridad eléctrica.</p>
+        <div className='imgs'>
+          <PREVENTIONN/>
+        </div>
         <h2>¿Para qué arriesgarse?</h2>
         <h3>Certificamos por su Seguridad!</h3>
         </main>
@@ -48,65 +137,54 @@ const Inicio = () => {
     }
   };
 
-  //carrusel
-
-  const images = [
-    { src: '/media/PREVENTION3.jpg', text: 'Las Mejores Tazas de Tucumán' },
-    { src: '/media/PREVENTION4.jpg', text: 'Calidad Asegurada' },
-    { src: '/media/PREVENTION5.jpg', text: 'Variedad de modelos' },
-  ];
-
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % images.length);
-    }, 5000); // Cambia cada 3 segundos
-
-    return () => clearInterval(interval); // Limpia el intervalo al desmontar
-  }, [images.length]);
-
-  // fin de carrusel
-
   return (
     <div className="grid-container">
       <header className="header">
-        <img
-          src="/media/PREVENTION.svg"
-          alt="Logo Prevention"
-        />
+        <PREVENTION/>
         </header>
+       
+        
       <nav className="menu">
       <button onClick={() => setCurrentView('login')} className="menu-button">
-          Cuenta
+           CUENTA
       </button>
       <button onClick={() => setCurrentView('inicio')} className="menu-button">
-          Inicio
+          INICIO
       </button>
       <button onClick={() => setCurrentView('quienes-somos')} className="menu-button">
-          ¿Quiénes Somos?
+          ¿POR QUÉ ELEGIRNOS?
       </button>
       <button onClick={() => setCurrentView('productos')} className="menu-button">
-          Productos
+          PRODUCTOS
       </button>
       <button onClick={() => setCurrentView('donde-estamos')} className="menu-button">
-          Donde Estamos
+          LOCACIÓN
       </button>
       <button onClick={() => setCurrentView('carrito')} className="menu-button">
-          Carrito de Compras
+          CARRITO
       </button>
-      <img
-          src="/media/Sello.svg"
-          alt="Logo Prevention"
-        />
+       <Sello />
     </nav>
       <main className="content">
       {renderView()}
      </main>
       <footer className="footer">
-        <p>Cel: (0381) 156 662-600</p>
-        <p>2024.Prevention.Todos los derechos reservados ®</p>
-        <p>Dirección</p>
+
+        <div className='footericons'>
+          <Tel/>
+          <p>Cel: +54(0381) 156 662-600</p>
+        </div>
+
+        <div className='footericons'>
+          <Derec/>
+          <p>2024.Prevention.Todos los derechos reservados ®</p>
+        </div>
+       
+        <div className='footericons'>
+        <Mail/>
+        <p>prevention.se1@gmail.com</p>
+        </div>
+        
       </footer>
     </div>
   );

@@ -1,18 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Cloudinary } from '@cloudinary/url-gen';
+import { auto } from '@cloudinary/url-gen/actions/resize';
+import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
+import { AdvancedImage } from '@cloudinary/react';
 
 const Index = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const cld = new Cloudinary({ cloud: { cloudName: 'dehmb7i5p' } });
   //carrusel
 
   const images = [
-    { src: '/media/PREVENTION7.jpg', text: 'Las Mejores Tazas de Tucumán' },
-    { src: '/media/PREVENTION9.jpg', text: 'Calidad Asegurada' },
-    { src: '/media/PREVENTION8.jpg', text: 'Variedad de modelos' },
+    { 
+      publicId: 'pps/PREVENTION10', 
+      text: 'Seguridad sobre todo' 
+    },
+    { 
+      publicId: 'pps/PREVENTION8', 
+      text: 'Calidad Asegurada' 
+    },
+    { 
+      publicId: 'pps/PREVENTION7', 
+      text: 'Variedad de modelos' 
+    },
   ];
 
-  const [currentSlide, setCurrentSlide] = useState(0);
+ const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % images.length);
+    }, 5000); 
+
+    return () => clearInterval(interval); 
+  }, [images.length]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -31,11 +52,21 @@ const Index = ({ children }) => {
   return (
       <main className="content">
         <h1>¿Por que elegirnos?</h1>
-        <div className="carousel">
-          <img src={images[currentSlide].src} alt="Taza" className="carousel-image" />
-          <div className="carousel-text">{images[currentSlide].text}</div>
-        </div>
-        <h1>Las 8 razones ALARI</h1>
+
+       <div className="carousel">
+               <AdvancedImage 
+                 cldImg={cld.image(images[currentSlide].publicId)
+                   .format('auto')
+                   .quality('auto')
+                    
+                   } 
+                 alt={images[currentSlide].text} 
+                 className="carousel-image" 
+               />
+               <div className="carousel-text">{images[currentSlide].text}</div>
+               </div>   
+
+        <h1>Las 8 razones por las que comprar tu cerco eléctrico</h1>
         <div className='razones'>
         <ul>
           <li><h2>Gran poder disuasivo</h2></li>
